@@ -94,6 +94,7 @@ CREATE TABLE `dfl_users_auth` (
   `authCode` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `authId` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `authDetail` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `authEmail` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `refreshToken` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `createdDate` datetime DEFAULT NULL,
   `modifiedDate` datetime DEFAULT NULL,
