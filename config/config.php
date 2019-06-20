@@ -113,6 +113,10 @@ return [
         'driverOptions' => [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8,time_zone = \'+0:00\'']
     ],
 
+    'geoIP2' => [
+        'dbPath' => '',
+    ],
+
     'paypal' => [
         'endpoint_checkout' => 'https://www.sandbox.paypal.com/webscr?cmd=_express-checkout&token=',
         'endpoint_ipn' => 'http://localhost/ipn/',

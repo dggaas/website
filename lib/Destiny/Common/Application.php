@@ -12,6 +12,7 @@ use Destiny\Common\Routing\Router;
 use Destiny\Common\Utils\RandomString;
 use Doctrine\Common\Cache\CacheProvider;
 use Doctrine\DBAL\Connection;
+use GeoIp2\Database\Reader as GeoIP2DBReader;
 use function GuzzleHttp\json_encode;
 use Redis;
 use ReflectionClass;
@@ -26,22 +27,25 @@ class Application extends Service {
 
     /** @var CacheProvider */
     public $cache2 = null;
-    
+
     /** @var Connection */
     protected $dbal;
-    
+
     /** @var SessionInstance */
     protected $session = null;
-    
+
     /** @var Redis */
     protected $redis = null;
-    
+
+    /** @var GeoIP2DBReader */
+    protected $geoIP2DB = null;
+
     /** @var Router */
     protected $router = null;
 
     /** @var AuditLogger */
     protected $auditLogger = null;
-    
+
     /** @var callable */
     public $loader;
 
@@ -338,6 +342,14 @@ class Application extends Service {
 
     public function setRedis(Redis $redis) {
         $this->redis = $redis;
+    }
+
+    public function getGeoIP2DB() {
+        return $this->geoIP2DB;
+    }
+
+    public function setGeoIP2DB(GeoIP2DBReader $geoIP2DB) {
+        $this->geoIP2DB = $geoIP2DB;
     }
 
     public function getRouter() {

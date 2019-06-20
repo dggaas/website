@@ -30,11 +30,11 @@ class Request {
     public function getBody(){
         return file_get_contents('php://input');
     }
-    
+
     public function path(){
         return parse_url ( $this->uri, PHP_URL_PATH );
     }
-    
+
     public function address() {
         return $this->address;
     }
@@ -46,7 +46,7 @@ class Request {
     public function uri() {
         return $this->uri;
     }
-    
+
     public function get() {
         return $this->get;
     }

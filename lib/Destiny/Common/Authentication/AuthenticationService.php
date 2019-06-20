@@ -87,6 +87,22 @@ class AuthenticationService extends Service {
     }
 
     /**
+     * @param string $ip
+     * @throws Exception
+     */
+    public function validateIP($ip) {
+        if (!filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+            throw new Exception ('A valid public IP is required');
+        }
+        $geoIP2Service = GeoIP2Service::instance();
+        $asn := $geoIP2Service->getASNByIP($ip);
+        $blacklist = array_merge([], include _BASEDIR . '/config/asns.blacklist.php');
+        if (in_array($ip, $blacklist)) {
+            throw new Exception ('IP is blacklisted');
+        }
+    }
+
+    /**
      * Starts up the session, looks for remember me if there was no session
      * Also updates the session if the user is flagged for it.
      * TODO this method is a mess

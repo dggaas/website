@@ -91,7 +91,7 @@ class RegistrationController {
     public function registerProcess(array $params, ViewModel $model, Request $request) {
         $userService = UserService::instance();
         $authService = AuthenticationService::instance();
-        
+
         try {
             $authCreds = $this->getSessionAuthenticationCredentials($params);
             $username = $params ['username'] ?? '';
@@ -101,6 +101,7 @@ class RegistrationController {
                 $googleRecaptchaHandler = new GoogleRecaptchaHandler();
                 $googleRecaptchaHandler->resolveWithRequest($request);
                 $authService->validateUsername($username);
+                $authService->validateIP($request->address());
                 $userService->checkUsernameTaken($username, -1);
                 $authCreds->setUsername($username);
             } catch (Exception $e) {

@@ -7,6 +7,7 @@ use Destiny\Discord\DiscordLogHandler;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Cache\RedisCache;
 use Doctrine\DBAL\DriverManager;
+use GeoIp2\Database\Reader as GeoIP2DBReader;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\PsrLogMessageProcessor;
@@ -76,3 +77,6 @@ $cache = new RedisCache();
 $cache->setRedis($redis2);
 $cache->setNamespace(Config::version());
 $app->setCache2($cache);
+
+// GeoIP lookup
+$app->setGeoIP2DB(new GeoIP2DBReader(Config::$a['geoIP2']['dbPath']));
